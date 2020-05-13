@@ -13,8 +13,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>hoa-service</module>
         <module>hoa-series-service</module>
+        <module>hoa-service</module>
     </modules>
 
 </project>
