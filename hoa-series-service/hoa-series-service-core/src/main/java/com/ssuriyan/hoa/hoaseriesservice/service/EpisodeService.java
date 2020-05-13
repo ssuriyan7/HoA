@@ -1,8 +1,8 @@
-package com.ssuriyan.hoa.services.series.service;
+package com.ssuriyan.hoa.hoaseriesservice.service;
 
-import com.ssuriyan.hoa.services.series.model.Anime;
-import com.ssuriyan.hoa.services.series.model.Episode;
-import com.ssuriyan.hoa.services.series.repository.EpisodeRepository;
+import com.ssuriyan.hoa.hoaseriesservice.model.Anime;
+import com.ssuriyan.hoa.hoaseriesservice.model.Episode;
+import com.ssuriyan.hoa.hoaseriesservice.repository.EpisodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

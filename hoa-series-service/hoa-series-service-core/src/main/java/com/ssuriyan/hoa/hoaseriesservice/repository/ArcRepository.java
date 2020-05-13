@@ -1,7 +1,8 @@
-package com.ssuriyan.hoa.services.series.repository;
+package com.ssuriyan.hoa.hoaseriesservice.repository;
 
-import com.ssuriyan.hoa.services.series.model.Anime;
-import com.ssuriyan.hoa.services.series.model.Arc;
+
+import com.ssuriyan.hoa.hoaseriesservice.model.Anime;
+import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

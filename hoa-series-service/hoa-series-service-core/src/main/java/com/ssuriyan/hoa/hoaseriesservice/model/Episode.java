@@ -1,4 +1,4 @@
-package com.ssuriyan.hoa.services.series.model;
+package com.ssuriyan.hoa.hoaseriesservice.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
