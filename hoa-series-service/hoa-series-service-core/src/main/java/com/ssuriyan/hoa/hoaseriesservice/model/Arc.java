@@ -16,9 +16,12 @@ public class Arc {
 
     private String name;
 
-    private int startEpisode;
+    @Column(unique = true)
+    private int arcNumber;
 
-    private int endEpisode;
+    private int firstEpisodeOfArc;
+
+    private int lastEpisodeOfArc;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "animeId")
@@ -40,20 +43,28 @@ public class Arc {
         this.name = name;
     }
 
-    public int getStartEpisode() {
-        return startEpisode;
+    public int getArcNumber() {
+        return arcNumber;
     }
 
-    public void setStartEpisode(int startEpisode) {
-        this.startEpisode = startEpisode;
+    public void setArcNumber(int arcNumber) {
+        this.arcNumber = arcNumber;
     }
 
-    public int getEndEpisode() {
-        return endEpisode;
+    public int getFirstEpisodeOfArc() {
+        return firstEpisodeOfArc;
     }
 
-    public void setEndEpisode(int endEpisode) {
-        this.endEpisode = endEpisode;
+    public void setFirstEpisodeOfArc(int firstEpisodeOfArc) {
+        this.firstEpisodeOfArc = firstEpisodeOfArc;
+    }
+
+    public int getLastEpisodeOfArc() {
+        return lastEpisodeOfArc;
+    }
+
+    public void setLastEpisodeOfArc(int lastEpisodeOfArc) {
+        this.lastEpisodeOfArc = lastEpisodeOfArc;
     }
 
     public Anime getAnime() {

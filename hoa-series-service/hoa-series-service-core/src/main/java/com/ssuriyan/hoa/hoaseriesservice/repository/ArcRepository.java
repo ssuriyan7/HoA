@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ArcRepository extends JpaRepository<Arc, String> {
     public void deleteByAnime(Anime anime);
+    public Arc getByArcNumber(int arcNumber);
 }

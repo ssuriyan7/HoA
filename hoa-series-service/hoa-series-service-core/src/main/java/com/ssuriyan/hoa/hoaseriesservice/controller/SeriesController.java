@@ -1,18 +1,20 @@
 package com.ssuriyan.hoa.hoaseriesservice.controller;
 
+import com.ssuriyan.hoa.hoaseriesservice.dto.AnimeDTO;
+import com.ssuriyan.hoa.hoaseriesservice.dto.ArcDTO;
+import com.ssuriyan.hoa.hoaseriesservice.dto.EpisodeDTO;
 import com.ssuriyan.hoa.hoaseriesservice.model.Anime;
+import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
+import com.ssuriyan.hoa.hoaseriesservice.model.Episode;
 import com.ssuriyan.hoa.hoaseriesservice.service.AnimeService;
 import com.ssuriyan.hoa.hoaseriesservice.service.ArcService;
 import com.ssuriyan.hoa.hoaseriesservice.service.EpisodeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/anime")
 public class SeriesController {
 
     @Autowired
@@ -29,5 +31,19 @@ public class SeriesController {
         return animeService.getAllAnime();
     }
 
+    @PostMapping(value = "/add/anime")
+    public AnimeDTO addAnime(@RequestBody Anime anime) {
+        return animeService.insertAnime(anime);
+    }
+
+    @PostMapping(value = "/add/arc")
+    public ArcDTO addArc(@RequestBody Arc arc) {
+        return arcService.insertArc(arc);
+    }
+
+    @PostMapping(value = "/add/episode")
+    public EpisodeDTO addEpisode(@RequestBody Episode episode) {
+        return episodeService.insertEpisode(episode);
+    }
 
 }
