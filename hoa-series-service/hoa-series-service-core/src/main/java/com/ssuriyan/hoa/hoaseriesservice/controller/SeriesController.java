@@ -46,4 +46,13 @@ public class SeriesController {
         return episodeService.insertEpisode(episode);
     }
 
+    @GetMapping(value = "/get/arcs")
+    public List<Arc> getArcsByAnime(@RequestBody Anime anime) {
+        return arcService.getArcsByAnime(anime);
+    }
+
+    @GetMapping(value = "/get/episodes")
+    public List<Episode> getEpisodesByArc(@RequestBody Arc arc) {
+        return episodeService.getEpisodesByArc(arc);
+    }
 }

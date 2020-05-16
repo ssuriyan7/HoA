@@ -6,8 +6,11 @@ import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ArcRepository extends JpaRepository<Arc, String> {
     public void deleteByAnime(Anime anime);
     public Arc getByArcNumber(int arcNumber);
+    public List<Arc> findByAnimeOrderByArcNumber(Anime anime);
 }

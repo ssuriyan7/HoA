@@ -1,5 +1,6 @@
 package com.ssuriyan.hoa.hoaseriesservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Episode {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_arc_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Arc arc;
 
     public String getId() {

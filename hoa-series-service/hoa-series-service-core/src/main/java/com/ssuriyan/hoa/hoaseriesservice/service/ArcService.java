@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -48,5 +49,9 @@ public class ArcService {
 
     public void deleteArcByAnime(Anime anime) {
         arcRepository.deleteByAnime(anime);
+    }
+
+    public List<Arc> getArcsByAnime(Anime anime) {
+        return arcRepository.findByAnimeOrderByArcNumber(anime);
     }
 }

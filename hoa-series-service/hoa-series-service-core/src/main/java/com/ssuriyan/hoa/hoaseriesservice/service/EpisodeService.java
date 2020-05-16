@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -43,6 +44,10 @@ public class EpisodeService {
             animeService.updateAnime(anime);
         }
         return new EpisodeDTO(requestStatus, savedEpisode);
+    }
+
+    public List<Episode> getEpisodesByArc(Arc arc) {
+        return  episodeRepository.findByArcOrderByEpisodeNumber(arc);
     }
 
     public void deleteEpisode(String id) {
