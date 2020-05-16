@@ -24,28 +24,7 @@ public class ArcService {
     public ArcDTO insertArc(Arc arc) {
         RequestStatus requestStatus;
         Arc savedArc = null;
-//        ArcDTO arcDTO = new ArcDTO();
-        /*Arc tempArc = arcRepository.getArcByArcNumber(arc.getArcNumber());
-        if (tempArc != null) {
-            requestStatus = new RequestStatus(RequestStatus.Status.ERROR,"Arc " + tempArc.getArcNumber() + " already exists! :(");
-        } else {
-            arc.setFirstEpisodeOfArc(0);
-            arc.setLastEpisodeOfArc(0);
-            tempArc = arcRepository.save(arc);
-            requestStatus = new RequestStatus(RequestStatus.Status.SUCCESS, "Insertion Success! :)");
-        }
-        arcDTO.setRequestStatus(requestStatus);
-        arcDTO.setArcToDTO(tempArc);*/
-        /*Arc tempArc = arcRepository.save(arc);
-        if(tempArc == null) {
-            requestStatus = new RequestStatus(RequestStatus.Status.ERROR,"Arc " + tempArc.getArcNumber() + " already exists! :(");
-        } else {
-            arc.setFirstEpisodeOfArc(0);
-            arc.setLastEpisodeOfArc(0);
-            requestStatus = new RequestStatus(RequestStatus.Status.SUCCESS, "Insertion Success! :)");
-        }
-        arcDTO.setRequestStatus(requestStatus);
-        arcDTO.setArcToDTO(tempArc);*/
+
         if ((savedArc = arcRepository.getByArcNumber(arc.getArcNumber())) != null) {
             requestStatus = new RequestStatus(RequestStatus.Status.ERROR,"Arc already exists! :(");
         } else {

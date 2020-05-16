@@ -33,6 +33,14 @@ public class AnimeService {
         return animeRepository.findAll();
     }
 
+    public Anime getOne(String id) {
+        return animeRepository.getOne(id);
+    }
+
+    public Anime updateAnime(Anime anime) {
+        return animeRepository.save(anime);
+    }
+
     public void deleteAnime(String id) {
         animeRepository.deleteAnimeById(id);
     }

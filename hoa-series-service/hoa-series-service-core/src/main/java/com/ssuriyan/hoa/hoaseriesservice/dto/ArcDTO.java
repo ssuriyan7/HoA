@@ -14,10 +14,6 @@ public class ArcDTO implements Serializable{
 
     private int arcNumber;
 
-    private int firstEpisodeOfArc;
-
-    private int lastEpisodeOfArc;
-
     private String animeId;
 
     public ArcDTO() {
@@ -28,8 +24,6 @@ public class ArcDTO implements Serializable{
         this.id = arc.getId();
         this.name = arc.getName();
         this.arcNumber = arc.getArcNumber();
-        this.firstEpisodeOfArc = arc.getFirstEpisodeOfArc();
-        this.lastEpisodeOfArc = arc.getLastEpisodeOfArc();
         this.animeId = arc.getAnime().getId();
     }
 
@@ -63,22 +57,6 @@ public class ArcDTO implements Serializable{
 
     public void setArcNumber(int arcNumber) {
         this.arcNumber = arcNumber;
-    }
-
-    public int getFirstEpisodeOfArc() {
-        return firstEpisodeOfArc;
-    }
-
-    public void setFirstEpisodeOfArc(int firstEpisodeOfArc) {
-        this.firstEpisodeOfArc = firstEpisodeOfArc;
-    }
-
-    public int getLastEpisodeOfArc() {
-        return lastEpisodeOfArc;
-    }
-
-    public void setLastEpisodeOfArc(int lastEpisodeOfArc) {
-        this.lastEpisodeOfArc = lastEpisodeOfArc;
     }
 
     public String getAnimeId() {

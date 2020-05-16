@@ -19,10 +19,6 @@ public class Arc {
     @Column(unique = true)
     private int arcNumber;
 
-    private int firstEpisodeOfArc;
-
-    private int lastEpisodeOfArc;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "animeId")
     private Anime anime;
@@ -49,22 +45,6 @@ public class Arc {
 
     public void setArcNumber(int arcNumber) {
         this.arcNumber = arcNumber;
-    }
-
-    public int getFirstEpisodeOfArc() {
-        return firstEpisodeOfArc;
-    }
-
-    public void setFirstEpisodeOfArc(int firstEpisodeOfArc) {
-        this.firstEpisodeOfArc = firstEpisodeOfArc;
-    }
-
-    public int getLastEpisodeOfArc() {
-        return lastEpisodeOfArc;
-    }
-
-    public void setLastEpisodeOfArc(int lastEpisodeOfArc) {
-        this.lastEpisodeOfArc = lastEpisodeOfArc;
     }
 
     public Anime getAnime() {

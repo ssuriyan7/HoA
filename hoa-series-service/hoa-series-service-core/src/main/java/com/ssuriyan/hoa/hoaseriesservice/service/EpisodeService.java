@@ -22,6 +22,9 @@ public class EpisodeService {
     @Autowired
     private ArcService arcService;
 
+    @Autowired
+    private AnimeService animeService;
+
     public EpisodeDTO insertEpisode(Episode episode) {
 
         RequestStatus requestStatus;
@@ -32,16 +35,13 @@ public class EpisodeService {
             requestStatus = new RequestStatus(RequestStatus.Status.ERROR, "Episode already exists! :(");
         }
         else {
-            int arcEpisodeCount = episodeRepository.countByArc_Id(arc.getId());
-            if (arcEpisodeCount == 0) {
-                arc.setFirstEpisodeOfArc(episode.getEpisodeNumber());
-            }
-            arc.setLastEpisodeOfArc(episode.getEpisodeNumber());
             savedEpisode = episodeRepository.save(episode);
-            arcService.updateArc(arc);
             requestStatus = new RequestStatus(RequestStatus.Status.SUCCESS, "Insertion success!");
+            //updating episode count in anime entity
+            Anime anime = animeService.getOne(arc.getAnime().getId());
+            anime.setEpisodeCount(anime.getEpisodeCount() + 1);
+            animeService.updateAnime(anime);
         }
-
         return new EpisodeDTO(requestStatus, savedEpisode);
     }
 
