@@ -3,10 +3,10 @@ package com.ssuriyan.hoa.hoaseriesservice.dto;
 import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArcDTO implements Serializable{
-
-    private RequestStatus requestStatus;
 
     private String id;
 
@@ -19,20 +19,11 @@ public class ArcDTO implements Serializable{
     public ArcDTO() {
     }
 
-    public ArcDTO(RequestStatus requestStatus, Arc arc) {
-        this.requestStatus = requestStatus;
+    public ArcDTO(Arc arc) {
         this.id = arc.getId();
         this.name = arc.getName();
         this.arcNumber = arc.getArcNumber();
         this.animeId = arc.getAnime().getId();
-    }
-
-    public RequestStatus getRequestStatus() {
-        return requestStatus;
-    }
-
-    public void setRequestStatus(RequestStatus requestStatus) {
-        this.requestStatus = requestStatus;
     }
 
     public String getId() {
@@ -65,5 +56,13 @@ public class ArcDTO implements Serializable{
 
     public void setAnimeId(String animeId) {
         this.animeId = animeId;
+    }
+
+    public static List<ArcDTO> getArcDTOList(List<Arc> arcList) {
+        List<ArcDTO> arcDTOList = new ArrayList<>();
+        for (Arc arc: arcList) {
+            arcDTOList.add(new ArcDTO(arc));
+        }
+        return arcDTOList;
     }
 }

@@ -4,9 +4,10 @@ import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
 import com.ssuriyan.hoa.hoaseriesservice.model.Episode;
 import com.ssuriyan.hoa.hoaseriesservice.model.Type;
 
-public class EpisodeDTO {
+import java.util.ArrayList;
+import java.util.List;
 
-    private RequestStatus requestStatus;
+public class EpisodeDTO {
 
     private String id;
 
@@ -23,22 +24,13 @@ public class EpisodeDTO {
     public EpisodeDTO() {
     }
 
-    public EpisodeDTO(RequestStatus requestStatus, Episode episode) {
-        this.requestStatus = requestStatus;
+    public EpisodeDTO(Episode episode) {
         this.id = episode.getId();
         this.name = episode.getName();
         this.episodeNumber = episode.getEpisodeNumber();
         this.duration = episode.getDuration();
         this.type = episode.getType();
         this.arcId = episode.getArc().getId();
-    }
-
-    public RequestStatus getRequestStatus() {
-        return requestStatus;
-    }
-
-    public void setRequestStatus(RequestStatus requestStatus) {
-        this.requestStatus = requestStatus;
     }
 
     public String getId() {
@@ -87,5 +79,13 @@ public class EpisodeDTO {
 
     public void setArcId(String arcId) {
         this.arcId = arcId;
+    }
+
+    public static List<EpisodeDTO> getEpisodeDTOList(List<Episode> episodeList) {
+        List<EpisodeDTO> episodeDTOList = new ArrayList<>();
+        for (Episode episode: episodeList) {
+            episodeDTOList.add(new EpisodeDTO(episode));
+        }
+        return episodeDTOList;
     }
 }

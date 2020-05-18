@@ -10,6 +10,7 @@ import com.ssuriyan.hoa.hoaseriesservice.service.AnimeService;
 import com.ssuriyan.hoa.hoaseriesservice.service.ArcService;
 import com.ssuriyan.hoa.hoaseriesservice.service.EpisodeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,33 +27,34 @@ public class SeriesController {
     @Autowired
     private EpisodeService episodeService;
 
-    @GetMapping(value = "/all")
-    public List<Anime> getAllAnime() {
-        return animeService.getAllAnime();
-    }
-
     @PostMapping(value = "/add/anime")
-    public AnimeDTO addAnime(@RequestBody Anime anime) {
+    public ResponseEntity<AnimeDTO> addAnime(@RequestBody Anime anime) {
         return animeService.insertAnime(anime);
     }
 
     @PostMapping(value = "/add/arc")
-    public ArcDTO addArc(@RequestBody Arc arc) {
+    public ResponseEntity<ArcDTO> addArc(@RequestBody Arc arc) {
         return arcService.insertArc(arc);
     }
 
     @PostMapping(value = "/add/episode")
-    public EpisodeDTO addEpisode(@RequestBody Episode episode) {
+    public ResponseEntity<EpisodeDTO> addEpisode(@RequestBody Episode episode) {
         return episodeService.insertEpisode(episode);
     }
 
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<AnimeDTO>> getAllAnime() {
+        return animeService.getAllAnime();
+    }
+
     @GetMapping(value = "/get/arcs")
-    public List<Arc> getArcsByAnime(@RequestBody Anime anime) {
+    public ResponseEntity<List<ArcDTO>> getArcsByAnime(@RequestBody Anime anime) {
         return arcService.getArcsByAnime(anime);
     }
 
     @GetMapping(value = "/get/episodes")
-    public List<Episode> getEpisodesByArc(@RequestBody Arc arc) {
+    public ResponseEntity<List<EpisodeDTO>> getEpisodesByArc(@RequestBody Arc arc) {
         return episodeService.getEpisodesByArc(arc);
     }
+
 }

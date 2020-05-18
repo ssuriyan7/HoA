@@ -1,13 +1,13 @@
 package com.ssuriyan.hoa.hoaseriesservice.service;
 
+import com.ssuriyan.hoa.hoaseriesservice.dto.ArcDTO;
 import com.ssuriyan.hoa.hoaseriesservice.dto.EpisodeDTO;
-import com.ssuriyan.hoa.hoaseriesservice.dto.RequestStatus;
 import com.ssuriyan.hoa.hoaseriesservice.model.Anime;
 import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
 import com.ssuriyan.hoa.hoaseriesservice.model.Episode;
-import com.ssuriyan.hoa.hoaseriesservice.repository.ArcRepository;
 import com.ssuriyan.hoa.hoaseriesservice.repository.EpisodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,9 +26,9 @@ public class EpisodeService {
     @Autowired
     private AnimeService animeService;
 
-    public EpisodeDTO insertEpisode(Episode episode) {
+    public ResponseEntity<EpisodeDTO> insertEpisode(Episode episode) {
 
-        RequestStatus requestStatus;
+        /*RequestStatus requestStatus;
         Episode savedEpisode = null;
         Arc arc = arcService.getOne(episode.getArc().getId());
 
@@ -43,11 +43,29 @@ public class EpisodeService {
             anime.setEpisodeCount(anime.getEpisodeCount() + 1);
             animeService.updateAnime(anime);
         }
-        return new EpisodeDTO(requestStatus, savedEpisode);
+        return new EpisodeDTO(requestStatus, savedEpisode);*/
+        Episode savedEpisode = null;
+        Arc arc = arcService.getOne(episode.getArc().getId());
+        if ((savedEpisode = episodeRepository.getByEpisodeNumber(episode.getEpisodeNumber())) != null) {
+            return ResponseEntity.badRequest()
+                    .header("Message", "Episode already exists! :(")
+                    .body(new EpisodeDTO(savedEpisode));
+        }
+        savedEpisode = episodeRepository.save(episode);
+        Anime anime = animeService.getOne(arc.getAnime().getId());
+        anime.setEpisodeCount(anime.getEpisodeCount() + 1);
+        animeService.updateAnime(anime);
+        return ResponseEntity.accepted()
+                .header("Message","Insertion success! :)")
+                .body(new EpisodeDTO(savedEpisode));
+
     }
 
-    public List<Episode> getEpisodesByArc(Arc arc) {
-        return  episodeRepository.findByArcOrderByEpisodeNumber(arc);
+    public ResponseEntity<List<EpisodeDTO>> getEpisodesByArc(Arc arc) {
+//        return  episodeRepository.findByArcOrderByEpisodeNumber(arc);
+        return ResponseEntity.ok()
+                .body(EpisodeDTO.getEpisodeDTOList(episodeRepository.findByArcOrderByEpisodeNumber(arc)));
+
     }
 
     public void deleteEpisode(String id) {

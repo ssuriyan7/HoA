@@ -2,11 +2,11 @@ package com.ssuriyan.hoa.hoaseriesservice.service;
 
 
 import com.ssuriyan.hoa.hoaseriesservice.dto.ArcDTO;
-import com.ssuriyan.hoa.hoaseriesservice.dto.RequestStatus;
 import com.ssuriyan.hoa.hoaseriesservice.model.Anime;
 import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
 import com.ssuriyan.hoa.hoaseriesservice.repository.ArcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,8 +22,8 @@ public class ArcService {
     @Autowired
     private AnimeService animeService;
 
-    public ArcDTO insertArc(Arc arc) {
-        RequestStatus requestStatus;
+    public ResponseEntity<ArcDTO> insertArc(Arc arc) {
+        /*RequestStatus requestStatus;
         Arc savedArc = null;
 
         if ((savedArc = arcRepository.getByArcNumber(arc.getArcNumber())) != null) {
@@ -32,7 +32,17 @@ public class ArcService {
             savedArc = arcRepository.save(arc);
             requestStatus = new RequestStatus(RequestStatus.Status.SUCCESS, "Insertion Success! :)");
         }
-        return new ArcDTO(requestStatus, savedArc);
+        return new ArcDTO(requestStatus, savedArc);*/
+        //TODO try returning null in body
+        Arc savedArc = null;
+        if ((savedArc = arcRepository.getByArcNumber(arc.getArcNumber())) != null) {
+            return ResponseEntity.badRequest()
+                    .header("Message", "Arc already exists! :(")
+                    .body(new ArcDTO(savedArc));
+        }
+        return ResponseEntity.accepted()
+                .header("Message", "Insertion Success! :)")
+                .body(new ArcDTO(savedArc));
     }
 
     public Arc updateArc(Arc arc) {
@@ -51,7 +61,11 @@ public class ArcService {
         arcRepository.deleteByAnime(anime);
     }
 
-    public List<Arc> getArcsByAnime(Anime anime) {
-        return arcRepository.findByAnimeOrderByArcNumber(anime);
+    public ResponseEntity<List<ArcDTO>> getArcsByAnime(Anime anime) {
+//        return arcRepository.findByAnimeOrderByArcNumber(anime);
+
+        return ResponseEntity.ok()
+                .body(ArcDTO.getArcDTOList(arcRepository.findByAnimeOrderByArcNumber(anime)));
+
     }
 }

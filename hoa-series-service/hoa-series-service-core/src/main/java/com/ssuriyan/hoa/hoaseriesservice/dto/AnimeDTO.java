@@ -2,9 +2,10 @@ package com.ssuriyan.hoa.hoaseriesservice.dto;
 
 import com.ssuriyan.hoa.hoaseriesservice.model.Anime;
 
-public class AnimeDTO {
+import java.util.ArrayList;
+import java.util.List;
 
-    private RequestStatus requestStatus;
+public class AnimeDTO {
 
     private String id;
 
@@ -19,21 +20,12 @@ public class AnimeDTO {
     public AnimeDTO() {
     }
 
-    public AnimeDTO(RequestStatus requestStatus, Anime anime) {
-        this.requestStatus = requestStatus;
+    public AnimeDTO(Anime anime) {
         this.id = anime.getId();
         this.name = anime.getName();
         this.mangaka = anime.getMangaka();
         this.description = anime.getDescription();
         this.episodeCount = anime.getEpisodeCount();
-    }
-
-    public RequestStatus getRequestStatus() {
-        return requestStatus;
-    }
-
-    public void setRequestStatus(RequestStatus requestStatus) {
-        this.requestStatus = requestStatus;
     }
 
     public String getId() {
@@ -74,5 +66,13 @@ public class AnimeDTO {
 
     public void setEpisodeCount(int episodeCount) {
         this.episodeCount = episodeCount;
+    }
+
+    public static List<AnimeDTO> getAnimeDTOList(List<Anime> animeList) {
+        List<AnimeDTO> animeDTOList = new ArrayList<>();
+        for (Anime anime: animeList) {
+            animeDTOList.add(new AnimeDTO(anime));
+        }
+        return animeDTOList;
     }
 }
