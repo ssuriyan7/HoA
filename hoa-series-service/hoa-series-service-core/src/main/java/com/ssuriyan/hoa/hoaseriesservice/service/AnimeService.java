@@ -18,41 +18,43 @@ public class AnimeService {
     @Autowired
     private AnimeRepository animeRepository;
 
-    public ResponseEntity<AnimeDTO> insertAnime(Anime anime) {
-        /*RequestStatus requestStatus;
-        Anime savedAnime = animeRepository.findByName(anime.getName());
-        if(savedAnime != null && savedAnime.getName().equalsIgnoreCase(anime.getName())) {
-            requestStatus = new RequestStatus(RequestStatus.Status.ERROR, "Anime already exists! :(");
-        } else {
-            savedAnime = animeRepository.save(anime);
-            requestStatus = new RequestStatus(RequestStatus.Status.SUCCESS, "Insertion success! :)");
-        }
-        return new AnimeDTO(requestStatus, savedAnime);*/
+    public Anime insertAnime(Anime anime) {
 
         Anime savedAnime = null;
         if((savedAnime = animeRepository.findByName(anime.getName())) != null) {
-            return ResponseEntity.badRequest()
-                    .header("Message", "Anime already exists! :(")
-                    .body(new AnimeDTO(savedAnime));
+            //Anime with same name already exists! :(
+            return savedAnime;
         }
-        savedAnime = animeRepository.save(anime);
-        return ResponseEntity.accepted()
-                .header("Message", "Insertion Success")
-                .body(new AnimeDTO(savedAnime));
+        return animeRepository.save(anime);
     }
 
-    public ResponseEntity<List<AnimeDTO>> getAllAnime() {
-//        return animeRepository.findAll();
-        return ResponseEntity.ok()
-                .body(AnimeDTO.getAnimeDTOList(animeRepository.findAll()));
+    public List<Anime> getAllAnime() {
+        return animeRepository.findAll();
     }
 
     public Anime getOne(String id) {
         return animeRepository.getOne(id);
     }
 
-    public Anime updateAnime(Anime anime) {
+    public Anime saveAnime(Anime anime) {
         return animeRepository.save(anime);
+    }
+
+    public Anime updateAnime(Anime anime) {
+        Anime savedAnime = animeRepository.getOne(anime.getId());
+        if(savedAnime != null) {
+            if(!anime.getName().isEmpty()) {
+                savedAnime.setName(anime.getName());
+            }
+            if(!anime.getMangaka().isEmpty()) {
+                savedAnime.setMangaka(anime.getMangaka());
+            }
+            if(!anime.getDescription().isEmpty()) {
+                savedAnime.setDescription(anime.getDescription());
+            }
+            return animeRepository.save(savedAnime);
+         }
+        return savedAnime;
     }
 
     public void deleteAnime(String id) {

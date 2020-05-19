@@ -63,4 +63,15 @@ public class Anime {
     public void setEpisodeCount(int episodeCount) {
         this.episodeCount = episodeCount;
     }
+
+    @Override
+    public String toString() {
+        return "Anime{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", mangaka='" + mangaka + '\'' +
+                ", description='" + description + '\'' +
+                ", episodeCount=" + episodeCount +
+                '}';
+    }
 }

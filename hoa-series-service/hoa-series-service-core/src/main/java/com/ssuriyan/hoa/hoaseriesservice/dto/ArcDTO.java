@@ -20,10 +20,14 @@ public class ArcDTO implements Serializable{
     }
 
     public ArcDTO(Arc arc) {
-        this.id = arc.getId();
-        this.name = arc.getName();
-        this.arcNumber = arc.getArcNumber();
-        this.animeId = arc.getAnime().getId();
+        if (arc != null) {
+            this.id = arc.getId();
+            this.name = arc.getName();
+            this.arcNumber = arc.getArcNumber();
+            if (arc.getAnime() != null) {
+                this.animeId = arc.getAnime().getId();
+            }
+        }
     }
 
     public String getId() {

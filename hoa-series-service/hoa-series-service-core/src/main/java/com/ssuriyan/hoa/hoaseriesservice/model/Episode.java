@@ -76,4 +76,16 @@ public class Episode {
     public void setArc(Arc arc) {
         this.arc = arc;
     }
+
+    @Override
+    public String toString() {
+        return "Episode{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", episodeNumber=" + episodeNumber +
+                ", duration=" + duration +
+                ", type=" + type +
+                ", arc=" + arc +
+                '}';
+    }
 }

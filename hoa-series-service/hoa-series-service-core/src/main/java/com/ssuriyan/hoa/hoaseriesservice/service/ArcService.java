@@ -22,31 +22,31 @@ public class ArcService {
     @Autowired
     private AnimeService animeService;
 
-    public ResponseEntity<ArcDTO> insertArc(Arc arc) {
-        /*RequestStatus requestStatus;
-        Arc savedArc = null;
-
-        if ((savedArc = arcRepository.getByArcNumber(arc.getArcNumber())) != null) {
-            requestStatus = new RequestStatus(RequestStatus.Status.ERROR,"Arc already exists! :(");
-        } else {
-            savedArc = arcRepository.save(arc);
-            requestStatus = new RequestStatus(RequestStatus.Status.SUCCESS, "Insertion Success! :)");
-        }
-        return new ArcDTO(requestStatus, savedArc);*/
-        //TODO try returning null in body
+    public Arc insertArc(Arc arc) {
         Arc savedArc = null;
         if ((savedArc = arcRepository.getByArcNumber(arc.getArcNumber())) != null) {
-            return ResponseEntity.badRequest()
-                    .header("Message", "Arc already exists! :(")
-                    .body(new ArcDTO(savedArc));
+            return savedArc;
         }
-        return ResponseEntity.accepted()
-                .header("Message", "Insertion Success! :)")
-                .body(new ArcDTO(savedArc));
+        return arcRepository.save(arc);
     }
 
     public Arc updateArc(Arc arc) {
-        return  arcRepository.save(arc);
+        Arc savedArc = arcRepository.getOne(arc.getId());
+        if (savedArc != null) {
+            if (!arc.getName().isEmpty()) {
+                savedArc.setName(arc.getName());
+            }
+
+            if(arc.getArcNumber() != 0) {
+                if(arcRepository.getByArcNumber(arc.getArcNumber()) != null){
+                    //arc number already in use
+                    return null;
+                }
+                savedArc.setArcNumber(arc.getArcNumber());
+            }
+            return  arcRepository.save(savedArc);
+        }
+        return  savedArc;
     }
 
     public Arc getOne(String arcId) {
@@ -61,11 +61,8 @@ public class ArcService {
         arcRepository.deleteByAnime(anime);
     }
 
-    public ResponseEntity<List<ArcDTO>> getArcsByAnime(Anime anime) {
-//        return arcRepository.findByAnimeOrderByArcNumber(anime);
-
-        return ResponseEntity.ok()
-                .body(ArcDTO.getArcDTOList(arcRepository.findByAnimeOrderByArcNumber(anime)));
-
+    public List<Arc> getArcsByAnime(Anime anime) {
+        return arcRepository.findByAnimeOrderByArcNumber(anime);
     }
+
 }

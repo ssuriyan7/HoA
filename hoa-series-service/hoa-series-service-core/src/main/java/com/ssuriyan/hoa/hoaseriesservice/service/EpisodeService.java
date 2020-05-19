@@ -1,13 +1,11 @@
 package com.ssuriyan.hoa.hoaseriesservice.service;
 
-import com.ssuriyan.hoa.hoaseriesservice.dto.ArcDTO;
-import com.ssuriyan.hoa.hoaseriesservice.dto.EpisodeDTO;
 import com.ssuriyan.hoa.hoaseriesservice.model.Anime;
 import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
 import com.ssuriyan.hoa.hoaseriesservice.model.Episode;
+import com.ssuriyan.hoa.hoaseriesservice.model.Type;
 import com.ssuriyan.hoa.hoaseriesservice.repository.EpisodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,46 +24,58 @@ public class EpisodeService {
     @Autowired
     private AnimeService animeService;
 
-    public ResponseEntity<EpisodeDTO> insertEpisode(Episode episode) {
-
-        /*RequestStatus requestStatus;
-        Episode savedEpisode = null;
-        Arc arc = arcService.getOne(episode.getArc().getId());
-
-        if ((savedEpisode = episodeRepository.getByEpisodeNumber(episode.getEpisodeNumber())) != null) {
-            requestStatus = new RequestStatus(RequestStatus.Status.ERROR, "Episode already exists! :(");
-        }
-        else {
-            savedEpisode = episodeRepository.save(episode);
-            requestStatus = new RequestStatus(RequestStatus.Status.SUCCESS, "Insertion success!");
-            //updating episode count in anime entity
-            Anime anime = animeService.getOne(arc.getAnime().getId());
-            anime.setEpisodeCount(anime.getEpisodeCount() + 1);
-            animeService.updateAnime(anime);
-        }
-        return new EpisodeDTO(requestStatus, savedEpisode);*/
-        Episode savedEpisode = null;
-        Arc arc = arcService.getOne(episode.getArc().getId());
-        if ((savedEpisode = episodeRepository.getByEpisodeNumber(episode.getEpisodeNumber())) != null) {
-            return ResponseEntity.badRequest()
-                    .header("Message", "Episode already exists! :(")
-                    .body(new EpisodeDTO(savedEpisode));
-        }
-        savedEpisode = episodeRepository.save(episode);
-        Anime anime = animeService.getOne(arc.getAnime().getId());
-        anime.setEpisodeCount(anime.getEpisodeCount() + 1);
-        animeService.updateAnime(anime);
-        return ResponseEntity.accepted()
-                .header("Message","Insertion success! :)")
-                .body(new EpisodeDTO(savedEpisode));
-
+    public Episode saveEpisode(Episode episode) {
+        return episodeRepository.save(episode);
     }
 
-    public ResponseEntity<List<EpisodeDTO>> getEpisodesByArc(Arc arc) {
-//        return  episodeRepository.findByArcOrderByEpisodeNumber(arc);
-        return ResponseEntity.ok()
-                .body(EpisodeDTO.getEpisodeDTOList(episodeRepository.findByArcOrderByEpisodeNumber(arc)));
+    public Episode insertEpisode(Episode episode) {
 
+        //TODO try with single database read to get the anime
+
+        Episode savedEpisode = null;
+        Arc arc = arcService.getOne(episode.getArc().getId());
+        if ((savedEpisode = episodeRepository.getByEpisodeNumber(episode.getEpisodeNumber())) != null) {
+            //Episode already exists! :(
+            return savedEpisode;
+        }
+        savedEpisode = episodeRepository.save(episode);
+        //updating episode count in anime
+        Anime anime = animeService.getOne(arc.getAnime().getId());
+        anime.setEpisodeCount(anime.getEpisodeCount() + 1);
+        animeService.saveAnime(anime);
+        return savedEpisode;
+    }
+
+    public List<Episode> getEpisodesByArc(Arc arc) {
+        return  episodeRepository.findByArcOrderByEpisodeNumber(arc);
+    }
+
+    public Episode getOne(String episodeId) {
+        return episodeRepository.getOne(episodeId);
+    }
+
+    public Episode updateEpisode(Episode episode) {
+        Episode savedEpisode = episodeRepository.getOne(episode.getId());
+        if(savedEpisode != null) {
+            if (!episode.getName().isEmpty()) {
+                savedEpisode.setName(episode.getName());
+            }
+            if (episode.getDuration() != 0.0) {
+                savedEpisode.setDuration(episode.getDuration());
+            }
+            if (episode.getType() != null) {
+                savedEpisode.setType(episode.getType());
+            }
+            if (episode.getEpisodeNumber() != 0) {
+                if(episodeRepository.getByEpisodeNumber(episode.getEpisodeNumber()) != null) {
+                    //episode number already in use
+                    return null;
+                }
+                savedEpisode.setEpisodeNumber(episode.getEpisodeNumber());
+            }
+            return episodeRepository.save(savedEpisode);
+        }
+        return savedEpisode;
     }
 
     public void deleteEpisode(String id) {

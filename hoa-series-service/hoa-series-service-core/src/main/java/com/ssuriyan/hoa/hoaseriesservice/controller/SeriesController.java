@@ -28,33 +28,63 @@ public class SeriesController {
     private EpisodeService episodeService;
 
     @PostMapping(value = "/add/anime")
-    public ResponseEntity<AnimeDTO> addAnime(@RequestBody Anime anime) {
-        return animeService.insertAnime(anime);
+    public AnimeDTO addAnime(@RequestBody Anime anime) {
+        return new AnimeDTO(animeService.insertAnime(anime));
     }
 
     @PostMapping(value = "/add/arc")
-    public ResponseEntity<ArcDTO> addArc(@RequestBody Arc arc) {
-        return arcService.insertArc(arc);
+    public ArcDTO addArc(@RequestBody Arc arc) {
+        return new ArcDTO(arcService.insertArc(arc));
     }
 
     @PostMapping(value = "/add/episode")
-    public ResponseEntity<EpisodeDTO> addEpisode(@RequestBody Episode episode) {
-        return episodeService.insertEpisode(episode);
+    public EpisodeDTO addEpisode(@RequestBody Episode episode) {
+        return new EpisodeDTO(episodeService.insertEpisode(episode));
     }
 
-    @GetMapping(value = "/all")
-    public ResponseEntity<List<AnimeDTO>> getAllAnime() {
-        return animeService.getAllAnime();
+    @GetMapping(value = "/get/animes")
+    public List<AnimeDTO> getAllAnime() {
+        return AnimeDTO.getAnimeDTOList(animeService.getAllAnime());
     }
 
     @GetMapping(value = "/get/arcs")
-    public ResponseEntity<List<ArcDTO>> getArcsByAnime(@RequestBody Anime anime) {
-        return arcService.getArcsByAnime(anime);
+    public List<ArcDTO> getArcsByAnime(@RequestBody Anime anime) {
+        return ArcDTO.getArcDTOList(arcService.getArcsByAnime(anime));
     }
 
     @GetMapping(value = "/get/episodes")
-    public ResponseEntity<List<EpisodeDTO>> getEpisodesByArc(@RequestBody Arc arc) {
-        return episodeService.getEpisodesByArc(arc);
+    public List<EpisodeDTO > getEpisodesByArc(@RequestBody Arc arc) {
+        return EpisodeDTO.getEpisodeDTOList(episodeService.getEpisodesByArc(arc));
+    }
+
+    @GetMapping(value = "/get/anime")
+    public AnimeDTO getAnime(@RequestParam String animeId) {
+        return new AnimeDTO(animeService.getOne(animeId));
+    }
+
+    @GetMapping(value = "/get/arc")
+    public ArcDTO getArc(@RequestParam String arcId) {
+        return new ArcDTO(arcService.getOne(arcId));
+    }
+
+    @GetMapping(value = "/get/episode")
+    public EpisodeDTO getEpisode(@RequestParam String episodeId) {
+        return new EpisodeDTO(episodeService.getOne(episodeId));
+    }
+
+    @PutMapping(value = "/update/anime")
+    public AnimeDTO updateAnime(@RequestBody Anime anime) {
+        return new AnimeDTO(animeService.updateAnime(anime));
+    }
+
+    @PutMapping(value = "/update/arc")
+    public ArcDTO updateArc(@RequestBody Arc arc) {
+        return new ArcDTO(arcService.updateArc(arc));
+    }
+
+    @PutMapping(value = "/update/episode")
+    public EpisodeDTO updateEpisode(@RequestBody Episode episode) {
+        return new EpisodeDTO(episodeService.updateEpisode(episode));
     }
 
 }

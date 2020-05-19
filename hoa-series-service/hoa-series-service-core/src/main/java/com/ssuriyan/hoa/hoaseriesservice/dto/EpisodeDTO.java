@@ -25,12 +25,16 @@ public class EpisodeDTO {
     }
 
     public EpisodeDTO(Episode episode) {
-        this.id = episode.getId();
-        this.name = episode.getName();
-        this.episodeNumber = episode.getEpisodeNumber();
-        this.duration = episode.getDuration();
-        this.type = episode.getType();
-        this.arcId = episode.getArc().getId();
+        if (episode != null) {
+            this.id = episode.getId();
+            this.name = episode.getName();
+            this.episodeNumber = episode.getEpisodeNumber();
+            this.duration = episode.getDuration();
+            this.type = episode.getType();
+            if(episode.getArc() != null) {
+                this.arcId = episode.getArc().getId();
+            }
+        }
     }
 
     public String getId() {

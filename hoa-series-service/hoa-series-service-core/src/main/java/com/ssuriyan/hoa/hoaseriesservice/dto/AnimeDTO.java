@@ -21,11 +21,13 @@ public class AnimeDTO {
     }
 
     public AnimeDTO(Anime anime) {
-        this.id = anime.getId();
-        this.name = anime.getName();
-        this.mangaka = anime.getMangaka();
-        this.description = anime.getDescription();
-        this.episodeCount = anime.getEpisodeCount();
+        if(anime != null) {
+            this.id = anime.getId();
+            this.name = anime.getName();
+            this.mangaka = anime.getMangaka();
+            this.description = anime.getDescription();
+            this.episodeCount = anime.getEpisodeCount();
+        }
     }
 
     public String getId() {

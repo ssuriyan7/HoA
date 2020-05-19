@@ -56,4 +56,14 @@ public class Arc {
     public void setAnime(Anime anime) {
         this.anime = anime;
     }
+
+    @Override
+    public String toString() {
+        return "Arc{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", arcNumber=" + arcNumber +
+                ", anime=" + anime +
+                '}';
+    }
 }
