@@ -12,5 +12,6 @@ import java.util.List;
 public interface ArcRepository extends JpaRepository<Arc, String> {
     public void deleteByAnime(Anime anime);
     public Arc getByArcNumber(int arcNumber);
+    public List<Arc> findByAnime(Anime anime);
     public List<Arc> findByAnimeOrderByArcNumber(Anime anime);
 }

@@ -78,8 +78,12 @@ public class EpisodeService {
         return savedEpisode;
     }
 
-    public void deleteEpisode(String id) {
-        episodeRepository.deleteById(id);
+    public void deleteEpisode(String episodeId) {
+        episodeRepository.deleteById(episodeId);
+    }
+
+    public void deleteEpisodesByArc(Arc arc) {
+        episodeRepository.deleteEpisodesByArc(arc);
     }
 
 }

@@ -22,6 +22,9 @@ public class ArcService {
     @Autowired
     private AnimeService animeService;
 
+    @Autowired
+    private EpisodeService episodeService;
+
     public Arc insertArc(Arc arc) {
         Arc savedArc = null;
         if ((savedArc = arcRepository.getByArcNumber(arc.getArcNumber())) != null) {
@@ -53,11 +56,16 @@ public class ArcService {
         return arcRepository.getOne(arcId);
     }
 
-    public void deleteArc(String id) {
-        arcRepository.deleteById(id);
+    public void deleteArc(Arc arc) {
+        episodeService.deleteEpisodesByArc(arc);
+        arcRepository.deleteById(arc.getId());
     }
 
-    public void deleteArcByAnime(Anime anime) {
+    public void deleteArcsByAnime(Anime anime) {
+        List<Arc> arcs = arcRepository.findByAnime(anime);
+        for (Arc arc : arcs) {
+            episodeService.deleteEpisodesByArc(arc);
+        }
         arcRepository.deleteByAnime(anime);
     }
 

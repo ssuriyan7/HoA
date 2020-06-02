@@ -87,4 +87,19 @@ public class SeriesController {
         return new EpisodeDTO(episodeService.updateEpisode(episode));
     }
 
+    @DeleteMapping(value = "/delete/anime")
+    public void deleteAnime(@RequestBody Anime anime) {
+        animeService.deleteAnime(anime);
+    }
+
+    @DeleteMapping(value = "/delete/arc")
+    public void deleteArc(@RequestBody Arc arc) {
+        arcService.deleteArc(arc);
+    }
+
+    @DeleteMapping(value = "/delete/episode")
+    public void deleteEpisode(@RequestParam String episodeId) {
+        episodeService.deleteEpisode(episodeId);
+    }
+
 }

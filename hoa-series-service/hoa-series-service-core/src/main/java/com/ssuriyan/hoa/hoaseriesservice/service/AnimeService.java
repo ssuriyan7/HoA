@@ -18,6 +18,9 @@ public class AnimeService {
     @Autowired
     private AnimeRepository animeRepository;
 
+    @Autowired
+    private ArcService arcService;
+
     public Anime insertAnime(Anime anime) {
 
         Anime savedAnime = null;
@@ -57,7 +60,9 @@ public class AnimeService {
         return savedAnime;
     }
 
-    public void deleteAnime(String id) {
-        animeRepository.deleteAnimeById(id);
+    public void deleteAnime(Anime anime) {
+        arcService.deleteArcsByAnime(anime);
+        animeRepository.deleteAnimeById(anime.getId());
     }
+
 }
