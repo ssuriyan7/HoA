@@ -3,7 +3,6 @@ package com.ssuriyan.hoa.hoaseriesservice.service;
 import com.ssuriyan.hoa.hoaseriesservice.model.Anime;
 import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
 import com.ssuriyan.hoa.hoaseriesservice.model.Episode;
-import com.ssuriyan.hoa.hoaseriesservice.model.Type;
 import com.ssuriyan.hoa.hoaseriesservice.repository.EpisodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
