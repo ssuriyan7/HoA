@@ -1,5 +1,5 @@
-# HoA [Not very useful. Just for practice]
-House of Anime application!
+# HoA 
+House of Anime application! [Not very useful. Just for practice]
 
 hoa-services is a multi-module maven project. Each of these modules can be built separately.
 -> hoa-series-service contains REST APIs for anime series.
