@@ -45,6 +45,11 @@
             <artifactId>hoa-series-service-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.ssuriyan.hoa</groupId>
+            <artifactId>hoa-manga-service-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
