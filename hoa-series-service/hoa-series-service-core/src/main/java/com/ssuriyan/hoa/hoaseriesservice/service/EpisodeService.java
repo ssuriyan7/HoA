@@ -46,7 +46,7 @@ public class EpisodeService {
     }
 
     public List<Episode> getEpisodesByArc(SeriesArc seriesArc) {
-        return  episodeRepository.findByArcOrderByEpisodeNumber(seriesArc);
+        return  episodeRepository.findBySeriesArcOrderByEpisodeNumber(seriesArc);
     }
 
     public Episode getOne(String episodeId) {
@@ -82,7 +82,7 @@ public class EpisodeService {
     }
 
     public void deleteEpisodesByArc(SeriesArc seriesArc) {
-        episodeRepository.deleteEpisodesByArc(seriesArc);
+        episodeRepository.deleteEpisodesBySeriesArc(seriesArc);
     }
 
 }
