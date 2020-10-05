@@ -4,13 +4,12 @@ import com.ssuriyan.hoa.hoaseriesservice.dto.AnimeDTO;
 import com.ssuriyan.hoa.hoaseriesservice.dto.ArcDTO;
 import com.ssuriyan.hoa.hoaseriesservice.dto.EpisodeDTO;
 import com.ssuriyan.hoa.hoaseriesservice.model.Anime;
-import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
+import com.ssuriyan.hoa.hoaseriesservice.model.SeriesArc;
 import com.ssuriyan.hoa.hoaseriesservice.model.Episode;
 import com.ssuriyan.hoa.hoaseriesservice.service.AnimeService;
 import com.ssuriyan.hoa.hoaseriesservice.service.ArcService;
 import com.ssuriyan.hoa.hoaseriesservice.service.EpisodeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +32,8 @@ public class SeriesController {
     }
 
     @PostMapping(value = "/add/arc")
-    public ArcDTO addArc(@RequestBody Arc arc) {
-        return new ArcDTO(arcService.insertArc(arc));
+    public ArcDTO addArc(@RequestBody SeriesArc seriesArc) {
+        return new ArcDTO(arcService.insertArc(seriesArc));
     }
 
     @PostMapping(value = "/add/episode")
@@ -53,8 +52,8 @@ public class SeriesController {
     }
 
     @GetMapping(value = "/get/episodes")
-    public List<EpisodeDTO > getEpisodesByArc(@RequestBody Arc arc) {
-        return EpisodeDTO.getEpisodeDTOList(episodeService.getEpisodesByArc(arc));
+    public List<EpisodeDTO > getEpisodesByArc(@RequestBody SeriesArc seriesArc) {
+        return EpisodeDTO.getEpisodeDTOList(episodeService.getEpisodesByArc(seriesArc));
     }
 
     @GetMapping(value = "/get/anime")
@@ -78,8 +77,8 @@ public class SeriesController {
     }
 
     @PutMapping(value = "/update/arc")
-    public ArcDTO updateArc(@RequestBody Arc arc) {
-        return new ArcDTO(arcService.updateArc(arc));
+    public ArcDTO updateArc(@RequestBody SeriesArc seriesArc) {
+        return new ArcDTO(arcService.updateArc(seriesArc));
     }
 
     @PutMapping(value = "/update/episode")
@@ -93,8 +92,8 @@ public class SeriesController {
     }
 
     @DeleteMapping(value = "/delete/arc")
-    public void deleteArc(@RequestBody Arc arc) {
-        arcService.deleteArc(arc);
+    public void deleteArc(@RequestBody SeriesArc seriesArc) {
+        arcService.deleteArc(seriesArc);
     }
 
     @DeleteMapping(value = "/delete/episode")

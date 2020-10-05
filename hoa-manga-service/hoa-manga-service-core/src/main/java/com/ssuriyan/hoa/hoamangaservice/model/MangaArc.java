@@ -1,5 +1,4 @@
-package com.ssuriyan.hoa.hoaseriesservice.model;
-
+package com.ssuriyan.hoa.hoamangaservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -7,23 +6,23 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "hoa_anime_arc")
-public class Arc {
+@Table(name = "hoa_manga_arc")
+public class MangaArc {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GenericGenerator(name = "uuid",  strategy = "uuid2")
     private String id;
-
-    private String name;
 
     @Column(unique = true)
     private int arcNumber;
 
+    private String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "animeId")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Anime anime;
+    @JoinColumn(name = "manga_id")
+    @JsonIgnoreProperties({"hibernateLazyInitial","handler"})
+    private Manga manga;
 
     public String getId() {
         return id;
@@ -31,14 +30,6 @@ public class Arc {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getArcNumber() {
@@ -49,21 +40,29 @@ public class Arc {
         this.arcNumber = arcNumber;
     }
 
-    public Anime getAnime() {
-        return anime;
+    public String getName() {
+        return name;
     }
 
-    public void setAnime(Anime anime) {
-        this.anime = anime;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Manga getManga() {
+        return manga;
+    }
+
+    public void setManga(Manga manga) {
+        this.manga = manga;
     }
 
     @Override
     public String toString() {
-        return "Arc{" +
+        return "MangaArc{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
                 ", arcNumber=" + arcNumber +
-                ", anime=" + anime +
+                ", name='" + name + '\'' +
+                ", manga=" + manga +
                 '}';
     }
 }

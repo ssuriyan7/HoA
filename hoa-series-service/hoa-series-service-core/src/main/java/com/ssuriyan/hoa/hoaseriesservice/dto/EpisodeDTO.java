@@ -1,6 +1,5 @@
 package com.ssuriyan.hoa.hoaseriesservice.dto;
 
-import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
 import com.ssuriyan.hoa.hoaseriesservice.model.Episode;
 import com.ssuriyan.hoa.hoaseriesservice.model.Type;
 
@@ -31,8 +30,8 @@ public class EpisodeDTO {
             this.episodeNumber = episode.getEpisodeNumber();
             this.duration = episode.getDuration();
             this.type = episode.getType();
-            if(episode.getArc() != null) {
-                this.arcId = episode.getArc().getId();
+            if(episode.getSeriesArc() != null) {
+                this.arcId = episode.getSeriesArc().getId();
             }
         }
     }

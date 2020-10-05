@@ -22,9 +22,9 @@ public class Chapter {
     private int pageCount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mangaId")
+    @JoinColumn(name = "manga_arc_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Manga manga;
+    private MangaArc mangaArc;
 
     public String getId() {
         return id;
@@ -58,12 +58,12 @@ public class Chapter {
         this.pageCount = pageCount;
     }
 
-    public Manga getManga() {
-        return manga;
+    public MangaArc getMangaArc() {
+        return mangaArc;
     }
 
-    public void setManga(Manga manga) {
-        this.manga = manga;
+    public void setMangaArc(MangaArc mangaArc) {
+        this.mangaArc = mangaArc;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Chapter {
                 ", name='" + name + '\'' +
                 ", chapterNumber=" + chapterNumber +
                 ", pageCount=" + pageCount +
-                ", manga=" + manga +
+                ", mangaArc=" + mangaArc +
                 '}';
     }
 }

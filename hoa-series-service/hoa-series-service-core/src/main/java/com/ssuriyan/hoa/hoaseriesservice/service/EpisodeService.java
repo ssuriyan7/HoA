@@ -1,7 +1,7 @@
 package com.ssuriyan.hoa.hoaseriesservice.service;
 
 import com.ssuriyan.hoa.hoaseriesservice.model.Anime;
-import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
+import com.ssuriyan.hoa.hoaseriesservice.model.SeriesArc;
 import com.ssuriyan.hoa.hoaseriesservice.model.Episode;
 import com.ssuriyan.hoa.hoaseriesservice.repository.EpisodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,21 +32,21 @@ public class EpisodeService {
         //TODO try with single database read to get the anime
 
         Episode savedEpisode = null;
-        Arc arc = arcService.getOne(episode.getArc().getId());
+        SeriesArc seriesArc = arcService.getOne(episode.getSeriesArc().getId());
         if ((savedEpisode = episodeRepository.getByEpisodeNumber(episode.getEpisodeNumber())) != null) {
             //Episode already exists! :(
             return savedEpisode;
         }
         savedEpisode = episodeRepository.save(episode);
         //updating episode count in anime
-        Anime anime = animeService.getOne(arc.getAnime().getId());
+        Anime anime = animeService.getOne(seriesArc.getAnime().getId());
         anime.setEpisodeCount(anime.getEpisodeCount() + 1);
         animeService.saveAnime(anime);
         return savedEpisode;
     }
 
-    public List<Episode> getEpisodesByArc(Arc arc) {
-        return  episodeRepository.findByArcOrderByEpisodeNumber(arc);
+    public List<Episode> getEpisodesByArc(SeriesArc seriesArc) {
+        return  episodeRepository.findByArcOrderByEpisodeNumber(seriesArc);
     }
 
     public Episode getOne(String episodeId) {
@@ -81,8 +81,8 @@ public class EpisodeService {
         episodeRepository.deleteById(episodeId);
     }
 
-    public void deleteEpisodesByArc(Arc arc) {
-        episodeRepository.deleteEpisodesByArc(arc);
+    public void deleteEpisodesByArc(SeriesArc seriesArc) {
+        episodeRepository.deleteEpisodesByArc(seriesArc);
     }
 
 }

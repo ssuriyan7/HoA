@@ -25,9 +25,9 @@ public class Episode {
     private Type type;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_arc_id")
+    @JoinColumn(name = "series_arc_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Arc arc;
+    private SeriesArc seriesArc;
 
     public String getId() {
         return id;
@@ -69,12 +69,12 @@ public class Episode {
         this.type = type;
     }
 
-    public Arc getArc() {
-        return arc;
+    public SeriesArc getSeriesArc() {
+        return seriesArc;
     }
 
-    public void setArc(Arc arc) {
-        this.arc = arc;
+    public void setSeriesArc(SeriesArc seriesArc) {
+        this.seriesArc = seriesArc;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Episode {
                 ", episodeNumber=" + episodeNumber +
                 ", duration=" + duration +
                 ", type=" + type +
-                ", arc=" + arc +
+                ", arc=" + seriesArc +
                 '}';
     }
 }

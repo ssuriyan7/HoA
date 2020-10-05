@@ -1,6 +1,6 @@
 package com.ssuriyan.hoa.hoaseriesservice.dto;
 
-import com.ssuriyan.hoa.hoaseriesservice.model.Arc;
+import com.ssuriyan.hoa.hoaseriesservice.model.SeriesArc;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,13 +19,13 @@ public class ArcDTO implements Serializable{
     public ArcDTO() {
     }
 
-    public ArcDTO(Arc arc) {
-        if (arc != null) {
-            this.id = arc.getId();
-            this.name = arc.getName();
-            this.arcNumber = arc.getArcNumber();
-            if (arc.getAnime() != null) {
-                this.animeId = arc.getAnime().getId();
+    public ArcDTO(SeriesArc seriesArc) {
+        if (seriesArc != null) {
+            this.id = seriesArc.getId();
+            this.name = seriesArc.getName();
+            this.arcNumber = seriesArc.getArcNumber();
+            if (seriesArc.getAnime() != null) {
+                this.animeId = seriesArc.getAnime().getId();
             }
         }
     }
@@ -62,10 +62,10 @@ public class ArcDTO implements Serializable{
         this.animeId = animeId;
     }
 
-    public static List<ArcDTO> getArcDTOList(List<Arc> arcList) {
+    public static List<ArcDTO> getArcDTOList(List<SeriesArc> seriesArcList) {
         List<ArcDTO> arcDTOList = new ArrayList<>();
-        for (Arc arc: arcList) {
-            arcDTOList.add(new ArcDTO(arc));
+        for (SeriesArc seriesArc : seriesArcList) {
+            arcDTOList.add(new ArcDTO(seriesArc));
         }
         return arcDTOList;
     }
