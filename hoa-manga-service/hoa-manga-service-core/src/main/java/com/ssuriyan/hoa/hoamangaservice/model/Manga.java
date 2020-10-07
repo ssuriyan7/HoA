@@ -1,20 +1,13 @@
 package com.ssuriyan.hoa.hoamangaservice.model;
 
+import com.ssuriyan.hoa.hoacommons.model.AbstractEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "hoa_manga")
-public class Manga {
-
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
-
-    @Column(unique = true)
-    private String name;
+public class Manga extends AbstractEntity {
 
     private String mangaka;
 
@@ -23,22 +16,6 @@ public class Manga {
     private int chapterCount;
 
     private String description;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getMangaka() {
         return mangaka;
@@ -75,9 +52,7 @@ public class Manga {
     @Override
     public String toString() {
         return "Manga{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", mangaka='" + mangaka + '\'' +
+                "mangaka='" + mangaka + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", chapterCount=" + chapterCount +
                 ", description='" + description + '\'' +

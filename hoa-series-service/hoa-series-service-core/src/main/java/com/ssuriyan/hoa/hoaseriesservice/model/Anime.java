@@ -1,5 +1,6 @@
 package com.ssuriyan.hoa.hoaseriesservice.model;
 
+import com.ssuriyan.hoa.hoacommons.model.AbstractEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "hoa_anime")
-public class Anime {
+public class Anime extends AbstractEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")

@@ -2,20 +2,14 @@ package com.ssuriyan.hoa.hoaseriesservice.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ssuriyan.hoa.hoacommons.model.AbstractEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "hoa_series_arc")
-public class SeriesArc {
-
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
-
-    private String name;
+public class SeriesArc extends AbstractEntity {
 
     @Column(unique = true)
     private int arcNumber;
@@ -24,22 +18,6 @@ public class SeriesArc {
     @JoinColumn(name = "animeId")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Anime anime;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getArcNumber() {
         return arcNumber;
@@ -59,10 +37,8 @@ public class SeriesArc {
 
     @Override
     public String toString() {
-        return "Arc{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", arcNumber=" + arcNumber +
+        return "SeriesArc{" +
+                "arcNumber=" + arcNumber +
                 ", anime=" + anime +
                 '}';
     }

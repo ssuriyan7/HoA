@@ -1,6 +1,7 @@
-package com.ssuriyan.hoa.hoamangaservice.model;
+package com.ssuriyan.hoa.hoamangaservice.controller;
 
 import com.ssuriyan.hoa.hoamangaservice.dto.MangaDTO;
+import com.ssuriyan.hoa.hoamangaservice.model.Manga;
 import com.ssuriyan.hoa.hoamangaservice.service.MangaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

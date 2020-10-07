@@ -1,21 +1,14 @@
 package com.ssuriyan.hoa.hoamangaservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ssuriyan.hoa.hoacommons.model.AbstractEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "hoa_chapter")
-public class Chapter {
-
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
-
-    @Column(unique = true)
-    private String name;
+public class Chapter extends AbstractEntity {
 
     private int chapterNumber;
 
@@ -25,22 +18,6 @@ public class Chapter {
     @JoinColumn(name = "manga_arc_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private MangaArc mangaArc;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getChapterNumber() {
         return chapterNumber;
@@ -69,9 +46,7 @@ public class Chapter {
     @Override
     public String toString() {
         return "Chapter{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", chapterNumber=" + chapterNumber +
+                "chapterNumber=" + chapterNumber +
                 ", pageCount=" + pageCount +
                 ", mangaArc=" + mangaArc +
                 '}';
