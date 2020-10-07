@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public interface EpisodeRepository extends JpaRepository<Episode, String> {
     public Episode getByEpisodeNumber(int episodeNumber);
-    //public int countBySeries_Arc_id(String arcId);
     public List<Episode> findBySeriesArcOrderByEpisodeNumber(SeriesArc seriesArc);
     public void deleteEpisodesBySeriesArc(SeriesArc seriesArc);
 }

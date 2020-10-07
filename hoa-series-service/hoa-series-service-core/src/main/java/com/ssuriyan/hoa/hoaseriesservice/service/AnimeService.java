@@ -25,7 +25,7 @@ public class AnimeService {
 
         Anime savedAnime = null;
         if((savedAnime = animeRepository.findByName(anime.getName())) != null) {
-            //Anime with same name already exists! :(
+            //Anime with same name already exists
             return savedAnime;
         }
         return animeRepository.save(anime);
@@ -49,8 +49,11 @@ public class AnimeService {
             if(!anime.getName().isEmpty()) {
                 savedAnime.setName(anime.getName());
             }
-            if(!anime.getMangaka().isEmpty()) {
+            /*if(!anime.getMangaka().isEmpty()) {
                 savedAnime.setMangaka(anime.getMangaka());
+            }*/
+            if(anime.getManga() != null) {
+                savedAnime.setManga(anime.getManga());
             }
             if(!anime.getDescription().isEmpty()) {
                 savedAnime.setDescription(anime.getDescription());

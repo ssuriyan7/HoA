@@ -11,7 +11,7 @@ public class AnimeDTO {
 
     private String name;
 
-    private String mangaka;
+    private String mangaId;
 
     private String description;
 
@@ -24,9 +24,11 @@ public class AnimeDTO {
         if(anime != null) {
             this.id = anime.getId();
             this.name = anime.getName();
-            this.mangaka = anime.getMangaka();
             this.description = anime.getDescription();
             this.episodeCount = anime.getEpisodeCount();
+            if (anime.getManga() != null) {
+                this.mangaId = anime.getManga().getId();
+            }
         }
     }
 
@@ -46,12 +48,12 @@ public class AnimeDTO {
         this.name = name;
     }
 
-    public String getMangaka() {
-        return mangaka;
+    public String getManga_id() {
+        return mangaId;
     }
 
-    public void setMangaka(String mangaka) {
-        this.mangaka = mangaka;
+    public void setManga_id(String manga_id) {
+        this.mangaId = manga_id;
     }
 
     public String getDescription() {

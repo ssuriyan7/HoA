@@ -15,6 +15,7 @@ public class Manga extends AbstractEntity {
 
     private int chapterCount;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     public String getMangaka() {
