@@ -16,6 +16,7 @@
         <module>hoa-commons</module>
         <module>hoa-manga-service</module>
         <module>hoa-series-service</module>
+        <module>hoa-gui</module>
         <module>hoa-service</module>
     </modules>
 

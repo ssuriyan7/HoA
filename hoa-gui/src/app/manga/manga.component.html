@@ -1,0 +1,37 @@
+<h2>All Mangas</h2>
+<div *ngIf="mangas">
+    <ul>
+        <li *ngFor="let manga of mangas">
+            <div *ngIf="manga">
+                <div>
+                    <span>Name: </span>
+                    <input [(ngModel)]="manga.name" placeholder=name>
+                </div>
+
+                <div>
+                    <span>Mangaka: </span>
+                    <input [(ngModel)]="manga.mangaka" placeholder=mangaka>
+                </div>
+
+                <div>
+                    <span>Publisher: </span>
+                    <input [(ngModel)]="manga.publisher" placeholder=publisher>
+                </div>
+
+                <div>
+                    <span>Description: </span>
+                    <input [(ngModel)]="manga.description" placeholder=description>
+                </div>
+
+                <div>
+                    <span>No. of chapters: </span>
+                    {{manga.chapterCount}}
+                </div>
+                
+                <div>
+                    <button (click)=updateManga(manga) >Update</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

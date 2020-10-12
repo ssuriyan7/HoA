@@ -2,6 +2,9 @@ package com.ssuriyan.hoa.hoamangaservice.dto;
 
 import com.ssuriyan.hoa.hoamangaservice.model.Manga;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MangaDTO {
 
     private String id;
@@ -76,5 +79,13 @@ public class MangaDTO {
 
     public void setChapterCount(int chapterCount) {
         this.chapterCount = chapterCount;
+    }
+
+    public static List<MangaDTO> getMangaDTOList(List<Manga> mangaList) {
+        List<MangaDTO> mangaDTOList = new ArrayList<>();
+        for (Manga manga: mangaList) {
+            mangaDTOList.add(new MangaDTO(manga));
+        }
+        return mangaDTOList;
     }
 }
